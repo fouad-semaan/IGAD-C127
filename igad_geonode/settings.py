@@ -40,7 +40,7 @@ LOCAL_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 WSGI_APPLICATION = "{}.wsgi.application".format(PROJECT_NAME)
 
-ALLOWED_HOSTS = ['localhost', 'django', '188.165.62.179', 'igad-dev.geo-solutions.it'] if os.getenv('ALLOWED_HOSTS') is None \
+ALLOWED_HOSTS = ['localhost', 'django', '51.255.134.48', 'igad.geo-solutions.it'] if os.getenv('ALLOWED_HOSTS') is None \
     else re.split(r' *[,|:|;] *', os.getenv('ALLOWED_HOSTS'))
 
 PROXY_ALLOWED_HOSTS += ('nominatim.openstreetmap.org',)
@@ -371,31 +371,31 @@ LOGGING = {
     },
     'handlers': {
         'null': {
-            'level': "DEBUG",
+            'level': "ERROR",
             'class': 'django.utils.log.NullHandler',
         },
         'console': {
-            'level': "DEBUG",
+            'level': "ERROR",
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
         'mail_admins': {
-            'level': "DEBUG", 'filters': ['require_debug_false'],
+            'level': "ERROR", 'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler',
         }
     },
     "loggers": {
         "django": {
-            "handlers": ["console"], "level": "DEBUG", },
+            "handlers": ["console"], "level": "ERROR", },
         "geonode": {
-            "handlers": ["console"], "level": "DEBUG", },
+            "handlers": ["console"], "level": "ERROR", },
         "gsconfig.catalog": {
-            "handlers": ["console"], "level": "DEBUG", },
+            "handlers": ["console"], "level": "ERROR", },
         "owslib": {
-            "handlers": ["console"], "level": "DEBUG", },
+            "handlers": ["console"], "level": "ERROR", },
         "pycsw": {
-            "handlers": ["console"], "level": "DEBUG", },
+            "handlers": ["console"], "level": "ERROR", },
         "igad_geonode": {
-            "handlers": ["console"], "level": "DEBUG", },
+            "handlers": ["console"], "level": "ERROR", },
         },
     }
