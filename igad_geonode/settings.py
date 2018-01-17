@@ -112,10 +112,10 @@ SOCIALACCOUNT_ADAPTER = 'geonode.people.adapters.SocialAccountAdapter'
 SOCIALACCOUNT_AUTO_SIGNUP = False
 
 # Uncomment this to enable Linkedin and Facebook login
-# INSTALLED_APPS += (
-#     'allauth.socialaccount.providers.linkedin_oauth2',
-#     'allauth.socialaccount.providers.facebook',
-# )
+INSTALLED_APPS += (
+    'allauth.socialaccount.providers.linkedin_oauth2',
+    'allauth.socialaccount.providers.facebook',
+)
 
 SOCIALACCOUNT_PROVIDERS = {
     'linkedin_oauth2': {
@@ -371,31 +371,31 @@ LOGGING = {
     },
     'handlers': {
         'null': {
-            'level': "DEBUG",
+            'level': "INFO",
             'class': 'django.utils.log.NullHandler',
         },
         'console': {
-            'level': "DEBUG",
+            'level': "INFO",
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
         'mail_admins': {
-            'level': "DEBUG", 'filters': ['require_debug_false'],
+            'level': "INFO", 'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler',
         }
     },
     "loggers": {
         "django": {
-            "handlers": ["console"], "level": "DEBUG", },
+            "handlers": ["console"], "level": "INFO", },
         "geonode": {
-            "handlers": ["console"], "level": "DEBUG", },
+            "handlers": ["console"], "level": "INFO", },
         "gsconfig.catalog": {
-            "handlers": ["console"], "level": "DEBUG", },
+            "handlers": ["console"], "level": "INFO", },
         "owslib": {
-            "handlers": ["console"], "level": "DEBUG", },
+            "handlers": ["console"], "level": "INFO", },
         "pycsw": {
-            "handlers": ["console"], "level": "DEBUG", },
+            "handlers": ["console"], "level": "INFO", },
         "igad_geonode": {
-            "handlers": ["console"], "level": "DEBUG", },
+            "handlers": ["console"], "level": "INFO", },
         },
     }
