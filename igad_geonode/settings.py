@@ -27,6 +27,8 @@ try:
 except ImportError:
     from geonode.settings import *
 
+DEBUG = False
+
 #
 # General Django development settings
 #
