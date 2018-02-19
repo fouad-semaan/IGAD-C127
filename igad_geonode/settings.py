@@ -89,6 +89,12 @@ loaders = TEMPLATES[0]['OPTIONS'].get('loaders') or ['django.template.loaders.fi
 TEMPLATES[0]['OPTIONS']['loaders'] = loaders
 TEMPLATES[0].pop('APP_DIRS', None)
 
+UNOCONV_ENABLE = strtobool(os.getenv('UNOCONV_ENABLE', 'True'))
+
+if UNOCONV_ENABLE:
+    UNOCONV_EXECUTABLE = os.getenv('UNOCONV_EXECUTABLE', '/usr/bin/unoconv')
+    UNOCONV_TIMEOUT = os.getenv('UNOCONV_TIMEOUT', 30)  # seconds
+
 CLIENT_RESULTS_LIMIT = 20
 API_LIMIT_PER_PAGE = 1000
 FREETEXT_KEYWORDS_READONLY = False
