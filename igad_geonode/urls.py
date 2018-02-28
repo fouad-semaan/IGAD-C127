@@ -18,18 +18,22 @@
 #
 #########################################################################
 
-from django.conf.urls import patterns, url, include
+from django.conf.urls import url, include
 from django.views.generic import TemplateView
 
 from geonode.urls import urlpatterns
+from igad_geonode import views
 
-urlpatterns += (
-## include your urls here
+hkeywords_patterns = [
+                url(r'^$', views.hkeyword_index, name='hkeyword_index'),
+                url(r'^(?P<slug>[\w]+)/',
+                    views.hkeyword_view,
+                    name='hkeyword_view'),
+                ]
 
-)
-
-urlpatterns = patterns('',
-   url(r'^/?$',
-       TemplateView.as_view(template_name='site_index.html'),
-       name='home'),
- ) + urlpatterns
+urlpatterns += [
+    url(r'hkeywords/', include(hkeywords_patterns)),
+    url(r'^/?$',
+        TemplateView.as_view(template_name='site_index.html'),
+        name='home'),
+]

@@ -27,7 +27,7 @@ try:
 except ImportError:
     from geonode.settings import *
 
-DEBUG = False
+DEBUG = os.environ.get('DEBUG', False)
 
 #
 # General Django development settings
@@ -121,8 +121,8 @@ SOCIALACCOUNT_AUTO_SIGNUP = False
 
 # Uncomment this to enable Linkedin and Facebook login
 INSTALLED_APPS += (
-    'allauth.socialaccount.providers.linkedin_oauth2',
-    'allauth.socialaccount.providers.facebook',
+    #'allauth.socialaccount.providers.linkedin_oauth2',
+    #'allauth.socialaccount.providers.facebook',
 )
 
 SOCIALACCOUNT_PROVIDERS = {
