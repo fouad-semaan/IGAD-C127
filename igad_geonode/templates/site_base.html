@@ -1,14 +1,24 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% load igad_tags %}
+
 {% block extra_head %}
       <link href="{{ STATIC_URL }}css/site_base.css" rel="stylesheet"/>
+      <link href="{{ STATIC_URL }}css/igad_base.css" rel="stylesheet"/>
 {% endblock %}
+
+
 {% block extra_tab %}
-{% comment %}
-Add Tab for Third Party Apps
+ 
 <li>
- <a href="{{ PROJECT_ROOT }}app">App</a>
-</li>
-{% endcomment %}
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Thematic Areas" %}<i class="fa fa-angle-down fa-lg"></i></a>
+    <ul class="dropdown-menu">
+        {% for menu_root in menu_roots %}
+        <li><a href="{% url "hkeyword_view" menu_root.slug %}">{{ menu_root.name }}</a></li>
+        {% endfor %}
+    </ul>
+ </li>
+
 {% endblock %}
 
 {% block footer %}

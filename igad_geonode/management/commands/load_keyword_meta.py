@@ -8,7 +8,7 @@ import os
 import csv
 from django.utils.translation import ugettext_lazy as _
 from django.core.management.base import BaseCommand, CommandError
-from geonode.contrib.igad.models import HierarchicalKeywordMeta
+from igad_geonode.models import HierarchicalKeywordMeta
 from geonode.base.models import HierarchicalKeyword
 
 
@@ -68,9 +68,11 @@ class Command(BaseCommand):
             hk = term.pop('hkeyword')
             try:
                 hkm = HierarchicalKeywordMeta.objects.get(hkeyword__name=hk)
+                print('existing', hkm.id, hkm.title, hkm.icon)
             except HierarchicalKeywordMeta.DoesNotExist:
                 hk = HierarchicalKeyword.objects.get(name=hk)
                 hkm = HierarchicalKeywordMeta.objects.create(hkeyword=hk, title=term)
+                print('new', hkm.title)
 
             hkm.update(**term)
             hkm.save()

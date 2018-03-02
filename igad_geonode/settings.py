@@ -88,6 +88,7 @@ loaders = TEMPLATES[0]['OPTIONS'].get('loaders') or ['django.template.loaders.fi
 # loaders.insert(0, 'apptemplates.Loader')
 TEMPLATES[0]['OPTIONS']['loaders'] = loaders
 TEMPLATES[0].pop('APP_DIRS', None)
+TEMPLATES[0]['OPTIONS']['context_processors'].append('igad_geonode.context_processors.menu_roots')
 
 UNOCONV_ENABLE = strtobool(os.getenv('UNOCONV_ENABLE', 'True'))
 
