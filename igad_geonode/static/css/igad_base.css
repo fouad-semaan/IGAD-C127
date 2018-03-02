@@ -1,0 +1,16 @@
+.keywords-container {
+    padding: 1pt;
+}
+
+.subkeyword {
+    display: inline-block;
+    margin-top: 2pt;
+    margin-bottom: 2pt;
+    border: solid 1px;
+    background-color: #efe;
+    float: left; 
+    width: 32%;
+    min-width: 360px;
+    margin: 0.25%;
+    min-height: 80px;
+}

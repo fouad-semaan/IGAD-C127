@@ -1,10 +1,11 @@
 {% load base_tags %}
 
+            <a href="{% searchurl keywords__slug__in=subkeyword.slug %}">
             <div class="subkeyword">
-                <a href="{% searchurl keywords__slug__in=subkeyword.slug %}">
+
                     <span class="icon" style="background: img({{ subkeyword.meta.icon }}) no-repeat;"></span>
                     <span class="description">
                     {{ subkeyword.name }}
                     </span>
-                </a>
             </div>
+            </a>

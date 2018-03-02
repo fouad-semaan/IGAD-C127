@@ -7,9 +7,10 @@
 
 
 {% block body %}
-<div class="menu">
+<div class="menu col-xs-2">
 
     <ul class="nav">
+
         <li class="home"><span><a href="{% url 'home' %}">{% trans 'Home' %}</a></span></li>
         {% for hkeyword in all_hkeywords %}
             {% if hkeyword == object %}
@@ -22,15 +23,16 @@
     </ul>
 </div>
 
-<div class="content">
-
+<div class="content col-xs-10">
+    <div class="container-fluid">
     {% block content %}
-    <div class="keywords keywords-container container">
+    <div class="keywords keywords-container">
         {% for subkeyword in object.get_children %}
             {% include 'igad/hkeyword_box.html' %}
         {% endfor %}
     </div>
     {% endblock %}
+    </div>
 
 </div>
 

@@ -20,6 +20,11 @@ class HierarchicalKeywordMeta(models.Model):
     def get_keywords(cls):
         return HierarchicalKeyword.objects.filter(meta__isnull=False)
 
+    @staticmethod
+    def get_hkeywords_roots():
+        return HierarchicalKeyword.objects\
+                                  .filter(meta__isnull=False,
+                                          depth=1)
 
     def update(self, **attrs):
         for attr, val in attrs.items():
