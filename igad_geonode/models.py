@@ -34,6 +34,8 @@ class HierarchicalKeywordMeta(models.Model):
 def get_menu_order():
     return Menu.objects.all().count() + 1
 
+def get_menu_item_order():
+    return MenuItem.objects.all().count() + 1
 
 class Menu(models.Model):
 
@@ -55,6 +57,11 @@ class MenuItem(models.Model):
     menu = models.ForeignKey(Menu)
     title = models.CharField(max_length=255, null=False, unique=True)
     url = models.URLField(null=False, unique=True)
+    order = models.IntegerField(null=False, default=get_menu_item_order,
+                                help_text=_("Position of menu item, ascending"))
+
+    class Meta:
+        ordering = ['order']
 
     @classmethod
     def get_for_menu(cls, menu):
