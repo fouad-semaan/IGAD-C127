@@ -5,16 +5,19 @@ from __future__ import print_function
 
 from django.contrib import admin
 
-from igad_geonode.models import HierarchicalKeywordMeta, MenuLink
+from igad_geonode.models import HierarchicalKeywordMeta, Menu, MenuItem
 
 
 @admin.register(HierarchicalKeywordMeta)
 class HierarchicalKeywordMetaAdmin(admin.ModelAdmin):
     list_display = ('title', 'hkeyword', 'icon', 'url',)
-    #fields = ('hkeyword', 'hkeyword__name', 'title', 'icon', 'description', 'url',)
-    #raw_id_fields = ('hkeyword',)
 
 
-@admin.register(MenuLink)
+@admin.register(Menu)
+class MenuAdmin(admin.ModelAdmin):
+    list_display = ('name', 'order',)
+
+
+@admin.register(MenuItem)
 class MenuLinkAdmin(admin.ModelAdmin):
-    list_display = ('menu', 'url', 'title',)
+    list_display = ('title', 'menu', 'url',)

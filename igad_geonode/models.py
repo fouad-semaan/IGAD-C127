@@ -31,19 +31,48 @@ class HierarchicalKeywordMeta(models.Model):
             setattr(self, attr, val)
 
 
-class MenuLink(models.Model):
-    MENU_EXT_LINK = 'external_link'
+def get_menu_order():
+    return Menu.objects.all().count() + 1
 
-    MENUS = ((MENU_EXT_LINK, _("External Links"),),
-             )
-    menu = models.CharField(max_length=32,
-                            choices=MENUS,
-                            null=False,
-                            default=MENU_EXT_LINK,
-                            db_index=True)
+
+class Menu(models.Model):
+
+    class Meta:
+        ordering = ['order']
+
+    name = models.CharField(max_length=255, null=False, unique=False)
+    order = models.IntegerField(null=False, default=get_menu_order,
+                                help_text=_("Position of menu, ascending"))
+
+    def __str__(self):
+        return 'Menu: {}'.format(self.name)
+
+    def get_items(self):
+        return MenuItem.get_for_menu(self)
+
+
+class MenuItem(models.Model):
+    menu = models.ForeignKey(Menu)
     title = models.CharField(max_length=255, null=False, unique=True)
     url = models.URLField(null=False, unique=True)
 
     @classmethod
     def get_for_menu(cls, menu):
-        return cls.objects.filter(menu=menu)
+        if isinstance(menu, (str, unicode,)):
+            return cls.objects.filter(menu__name=menu)
+        elif isinstance(menu, Menu):
+            return cls.objects.filter(menu=menu)
+        else:
+            return cls.objects.filter(menu__id=menu)
+
+    def get_url(self):
+        # this may be extended in future, so url can be generated
+        # dynamically, or for related object
+        return self.url
+
+    @classmethod
+    def get_menus(cls):
+        out = []
+        for m in Menu.objects.all():
+            out.append((m, cls.get_for_menu(m),))
+        return out

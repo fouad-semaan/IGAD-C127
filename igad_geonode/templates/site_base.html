@@ -18,14 +18,17 @@
     </ul>
  </li>
 
+{% for menu, menu_items in extra_menus %}
 <li>
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "External links" %}<i class="fa fa-angle-down fa-lg"></i></a>
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ menu.name }}<i class="fa fa-angle-down fa-lg"></i></a>
     <ul class="dropdown-menu">
-        {% for external_link in external_links %}
-        <li><a href="{{ external_link.url }}">{{ external_link.title }}</a></li>
+        {% for menu_item in menu_items %}
+        <li><a href="{{ menu_item.get_url }}">{{ menu_item.title }}</a></li>
         {% endfor %}
     </ul>
  </li>
+{% endfor %}
+
 {% endblock %}
 
 {% block footer %}
