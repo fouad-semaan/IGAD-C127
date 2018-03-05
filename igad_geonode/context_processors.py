@@ -21,11 +21,11 @@
 
 from django import template
 
-from igad_geonode.models import HierarchicalKeywordMeta
+from igad_geonode.models import HierarchicalKeywordMeta, MenuItem
 
 
 def menu_roots(request):
     ctx = {}
     ctx['menu_roots'] = HierarchicalKeywordMeta.get_hkeywords_roots()
+    ctx['extra_menus'] = MenuItem.get_menus() 
     return ctx
-
