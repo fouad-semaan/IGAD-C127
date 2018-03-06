@@ -19,13 +19,11 @@
 #
 #########################################################################
 
-from django import template
-from igad_geonode.utils import searchurl as surl
+from urllib import urlencode
+from django.core.urlresolvers import reverse
 
 
-register = template.Library()
-
-
-@register.simple_tag(takes_context=True)
-def searchurl(context, **params):
-    return surl(**params)
+def searchurl(**params):
+    base = reverse('layer_browse')
+    q = urlencode(params)
+    return '{}?{}'.format(base, q)
