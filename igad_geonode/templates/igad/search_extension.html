@@ -1,0 +1,44 @@
+    <div id="side_menus" class="hidden">
+        {% for menu, menu_items in sidebar_menus %}
+            {% include 'igad/_search_filter_item.html' %}
+        {% endfor %}
+    </div>
+
+    <script type="text/javascript">
+
+        /** 
+            init specific menu item
+        */
+        function do_init_menu_item(idx, _item){
+            var item = $('a', _item);
+            var filter_type = item.data('type');
+            var filter_value = item.data('value');
+            var filter = item.data('filter');
+            if (filter_type == 'url'){
+                var value = filter_value;
+            } else {
+                var loc = new URLSearchParams(location.search);
+                loc.set(filter, filter_value);
+                var value = '?' + loc.toString();
+            }
+            item.attr('href', value);
+        }
+
+        /**
+            Init specific menu
+        */
+        function do_init_menu_search(idx, item){
+            $('li', item).each(do_init_menu_item);
+        };
+
+        var init_menu_search = function(){
+            var search_panel = $('#slide-pane');
+            var new_items = $('#side_menus').children()
+            search_panel.append(new_items);
+
+            new_items.each(do_init_menu_search);
+
+            };
+        
+        $(init_menu_search);
+    </script>

@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.core.exceptions import ValidationError
 
-from geonode.base.models import HierarchicalKeyword
+from geonode.base.models import HierarchicalKeyword, Region
 from geonode.groups.models import GroupProfile
 
 from igad_geonode.utils import searchurl
@@ -42,12 +42,23 @@ def get_menu_item_order():
 
 class Menu(models.Model):
 
+    MENU_TOP = 'top'
+    MENU_SIDEBAR = 'sidebar'
+    MENU_LOCATIONS = ((MENU_TOP, _("Top menu"),),
+                      (MENU_SIDEBAR, _("Search sidebar"),),
+                      )
+
     class Meta:
         ordering = ['order']
 
     name = models.CharField(max_length=255, null=False, unique=False)
     order = models.IntegerField(null=False, default=get_menu_order,
                                 help_text=_("Position of menu, ascending"))
+    location = models.CharField(max_length=32,
+                                choices=MENU_LOCATIONS,
+                                null=False,
+                                default=MENU_TOP,
+                                db_index=True)
 
     def __str__(self):
         return 'Menu: {}'.format(self.name)
@@ -64,14 +75,15 @@ class MenuItem(models.Model):
                                 help_text=_("Position of menu item, ascending"))
 
     group = models.ForeignKey(GroupProfile, null=True, blank=True)
+    region = models.ForeignKey(Region, null=True, blank=True)
 
     class Meta:
         ordering = ['order']
 
     def clean(self):
-        if not (self.url or self.group):
-            msg = _("There should be one of: url or group, got none")
-            raise ValidationError({'url': msg, 'group': msg})
+        if not (self.url or self.group or self.region):
+            msg = _("There should be one of: url, group or region, got none")
+            raise ValidationError({'url': msg, 'group': msg, 'region': msg})
         if self.url and self.group:
             msg = _("There should be one of: url or group, got both")
             raise ValidationError({'url': msg, 'group': msg})
@@ -90,11 +102,47 @@ class MenuItem(models.Model):
         # dynamically, or for related object
         if self.group:
             return searchurl(group=self.group.group.id)
+        elif self.region:
+            return searchurl(regions__name__in=self.region.name)
         return self.url
 
     @classmethod
-    def get_menus(cls):
+    def get_menus(cls, location):
         out = []
-        for m in Menu.objects.all():
+        for m in Menu.objects.filter(location=location):
             out.append((m, cls.get_for_menu(m),))
         return out
+
+    def get_filter_type(self):
+        """
+        marker for sidebar filter - type of filter
+
+        it can be either 'filter' - meaning it's a
+        search filter
+        or 'url' - meaning it's plain url to use as href
+        """
+        if self.group or self.region:
+            return 'filter'
+        return 'url'
+
+    def get_filter_value(self):
+        """
+        returns value to use as filter
+        """
+        if self.group:
+            return self.group.group.id
+        elif self.region:
+            return self.region.name
+        else:
+            return url
+
+    def get_filter(self):
+        """
+        returns query string filter keyword
+        """
+        if self.group:
+            return 'group'
+        elif self.region:
+            return 'regions__name__in'
+        else:
+            return ''
