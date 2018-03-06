@@ -4,9 +4,12 @@
 from __future__ import print_function
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
+from django.core.exceptions import ValidationError
 
 from geonode.base.models import HierarchicalKeyword
-# Create your models here.
+from geonode.groups.models import GroupProfile
+
+from igad_geonode.utils import searchurl
 
 
 class HierarchicalKeywordMeta(models.Model):
@@ -55,13 +58,23 @@ class Menu(models.Model):
 
 class MenuItem(models.Model):
     menu = models.ForeignKey(Menu)
-    title = models.CharField(max_length=255, null=False, unique=True)
-    url = models.URLField(null=False, unique=True)
+    title = models.CharField(max_length=255, null=False, unique=False)
+    url = models.URLField(null=True, blank=True)
     order = models.IntegerField(null=False, default=get_menu_item_order,
                                 help_text=_("Position of menu item, ascending"))
 
+    group = models.ForeignKey(GroupProfile, null=True, blank=True)
+
     class Meta:
         ordering = ['order']
+
+    def clean(self):
+        if not (self.url or self.group):
+            msg = _("There should be one of: url or group, got none")
+            raise ValidationError({'url': msg, 'group': msg})
+        if self.url and self.group:
+            msg = _("There should be one of: url or group, got both")
+            raise ValidationError({'url': msg, 'group': msg})
 
     @classmethod
     def get_for_menu(cls, menu):
@@ -75,6 +88,8 @@ class MenuItem(models.Model):
     def get_url(self):
         # this may be extended in future, so url can be generated
         # dynamically, or for related object
+        if self.group:
+            return searchurl(group=self.group.group.id)
         return self.url
 
     @classmethod
