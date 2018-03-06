@@ -21,11 +21,20 @@
 
 from django import template
 
-from igad_geonode.models import HierarchicalKeywordMeta, MenuItem
+from igad_geonode.models import HierarchicalKeywordMeta, MenuItem, Menu
+
+
+def sidebar_menus():
+    return MenuItem.get_menus(Menu.MENU_SIDEBAR)
+
+
+def top_menus():
+    return MenuItem.get_menus(Menu.MENU_TOP) 
 
 
 def menu_roots(request):
     ctx = {}
     ctx['menu_roots'] = HierarchicalKeywordMeta.get_hkeywords_roots()
-    ctx['extra_menus'] = MenuItem.get_menus() 
+    ctx['top_menus'] = top_menus
+    ctx['sidebar_menus'] = sidebar_menus
     return ctx

@@ -42,12 +42,23 @@ def get_menu_item_order():
 
 class Menu(models.Model):
 
+    MENU_TOP = 'top'
+    MENU_SIDEBAR = 'sidebar'
+    MENU_LOCATIONS = ((MENU_TOP, _("Top menu"),),
+                      (MENU_SIDEBAR, _("Search sidebar"),),
+                      )
+
     class Meta:
         ordering = ['order']
 
     name = models.CharField(max_length=255, null=False, unique=False)
     order = models.IntegerField(null=False, default=get_menu_order,
                                 help_text=_("Position of menu, ascending"))
+    location = models.CharField(max_length=32,
+                                choices=MENU_LOCATIONS,
+                                null=False,
+                                default=MENU_TOP,
+                                db_index=True)
 
     def __str__(self):
         return 'Menu: {}'.format(self.name)
@@ -96,8 +107,42 @@ class MenuItem(models.Model):
         return self.url
 
     @classmethod
-    def get_menus(cls):
+    def get_menus(cls, location):
         out = []
-        for m in Menu.objects.all():
+        for m in Menu.objects.filter(location=location):
             out.append((m, cls.get_for_menu(m),))
         return out
+
+    def get_filter_type(self):
+        """
+        marker for sidebar filter - type of filter
+
+        it can be either 'filter' - meaning it's a
+        search filter
+        or 'url' - meaning it's plain url to use as href
+        """
+        if self.group or self.region:
+            return 'filter'
+        return 'url'
+
+    def get_filter_value(self):
+        """
+        returns value to use as filter
+        """
+        if self.group:
+            return self.group.group.id
+        elif self.region:
+            return self.region.name
+        else:
+            return url
+
+    def get_filter(self):
+        """
+        returns query string filter keyword
+        """
+        if self.group:
+            return 'group'
+        elif self.region:
+            return 'regions__name__in'
+        else:
+            return ''
