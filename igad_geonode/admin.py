@@ -15,7 +15,7 @@ class HierarchicalKeywordMetaAdmin(admin.ModelAdmin):
 
 @admin.register(Menu)
 class MenuAdmin(admin.ModelAdmin):
-    list_display = ('name', 'order',)
+    list_display = ('name', 'location', 'order',)
 
 
 @admin.register(MenuItem)
