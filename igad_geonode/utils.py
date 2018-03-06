@@ -24,6 +24,6 @@ from django.core.urlresolvers import reverse
 
 
 def searchurl(**params):
-    base = reverse('layer_browse')
+    base = reverse('search')
     q = urlencode(params)
     return '{}?{}'.format(base, q)
