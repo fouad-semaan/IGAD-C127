@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.core.exceptions import ValidationError
 
-from geonode.base.models import HierarchicalKeyword
+from geonode.base.models import HierarchicalKeyword, Region
 from geonode.groups.models import GroupProfile
 
 from igad_geonode.utils import searchurl
@@ -64,14 +64,15 @@ class MenuItem(models.Model):
                                 help_text=_("Position of menu item, ascending"))
 
     group = models.ForeignKey(GroupProfile, null=True, blank=True)
+    region = models.ForeignKey(Region, null=True, blank=True)
 
     class Meta:
         ordering = ['order']
 
     def clean(self):
-        if not (self.url or self.group):
-            msg = _("There should be one of: url or group, got none")
-            raise ValidationError({'url': msg, 'group': msg})
+        if not (self.url or self.group or self.region):
+            msg = _("There should be one of: url, group or region, got none")
+            raise ValidationError({'url': msg, 'group': msg, 'region': msg})
         if self.url and self.group:
             msg = _("There should be one of: url or group, got both")
             raise ValidationError({'url': msg, 'group': msg})
@@ -90,6 +91,8 @@ class MenuItem(models.Model):
         # dynamically, or for related object
         if self.group:
             return searchurl(group=self.group.group.id)
+        elif self.region:
+            return searchurl(regions__name__in=self.region.name)
         return self.url
 
     @classmethod
