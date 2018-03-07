@@ -1,3 +1,8 @@
+.navbar-brand {
+    width: 65px!important;
+    margin-right: 2pt;
+}
+
 .keywords-container {
     padding: 1pt;
 }
