@@ -8,14 +8,27 @@
 }
 
 .subkeyword {
-    display: inline-block;
-    margin-top: 2pt;
-    margin-bottom: 2pt;
-    border: solid 1px;
-    background-color: #efe;
-    float: left; 
-    width: 32%;
-    min-width: 360px;
-    margin: 0.25%;
+    display: flex;
+    margin: 4px 0;
+    width: 100%;
     min-height: 80px;
+    padding: 16px 8px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.subkeyword:hover {
+    opacity: 0.7;
+}
+
+.icon {
+    width: 48px;
+    margin-right: 4px;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+
+.description {
+    flex: 1;
+    overflow: hidden;
 }
