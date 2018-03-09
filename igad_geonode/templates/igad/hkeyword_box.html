@@ -1,11 +1,21 @@
 {% load igad_tags %}
 
-            <a href="{% searchurl keywords__slug__in=subkeyword.slug %}">
-            <div class="subkeyword">
-
-                    <span class="icon" style="background: img({{ subkeyword.meta.icon }}) no-repeat;"></span>
-                    <span class="description">
-                    {{ subkeyword.name }}
-                    </span>
-            </div>
-            </a>
+<div class="col-xs-12 col-md-6">
+        <a href="{% searchurl keywords__slug__in=subkeyword.slug %}">
+                {% if subkeyword.color %}
+                <div class="subkeyword" style="background-color: {{ subkeyword.color }};">
+                        <div class="icon" style="background: url({{ subkeyword.meta.icon }});"></div>
+                        <div class="description">
+                                {{ subkeyword.name }}
+                        </div>
+                </div>
+                {% else %}
+                <div class="subkeyword" style="background-color: #0b612d;">
+                        <div class="icon" style="background: url({{ subkeyword.meta.icon }});"></div>
+                        <div class="description">
+                                {{ subkeyword.name }}
+                        </div>
+                </div>
+                {% endif %}
+        </a>
+</div>
