@@ -14,9 +14,10 @@ from igad_geonode.utils import searchurl
 
 class HierarchicalKeywordMeta(models.Model):
     hkeyword = models.ForeignKey(HierarchicalKeyword, related_name='meta')
-    icon = models.CharField(max_length=128, null=False)
     title = models.CharField(max_length=128, null=True)
     description = models.TextField(null=True)
+    icon = models.CharField(max_length=128, null=False)
+    color = models.CharField(max_length=128, null=True)
     url = models.URLField(null=True)
 
     @classmethod
