@@ -2,7 +2,7 @@
 
 <div class="col-xs-12 col-md-6">
         <a href="{% searchurl keywords__slug__in=subkeyword.slug %}">
-                {% if subkeyword.color %}
+                {% if subkeyword.meta.color %}
                 <div class="subkeyword" style="background-color: {{ subkeyword.meta.color }};">
                         <div class="icon" style="background: url({{ subkeyword.meta.icon }});"></div>
                         <div class="description">
