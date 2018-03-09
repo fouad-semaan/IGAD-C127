@@ -26,7 +26,7 @@ from igad_geonode import views
 
 hkeywords_patterns = [
                 url(r'^$', views.hkeyword_index, name='hkeyword_index'),
-                url(r'^(?P<slug>[\w]+)/',
+                url(r'^(?P<slug>[a-zA-Z0-9_.-]+)/',
                     views.hkeyword_view,
                     name='hkeyword_view'),
                 ]
