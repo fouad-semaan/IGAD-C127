@@ -13,7 +13,7 @@ from igad_geonode.utils import searchurl
 
 
 class HierarchicalKeywordMeta(models.Model):
-    hkeyword = models.ForeignKey(HierarchicalKeyword, related_name='meta')
+    hkeyword = models.OneToOneField(HierarchicalKeyword, related_name='meta')
     title = models.CharField(max_length=128, null=False, default="")
     description = models.TextField(null=True, blank=True)
     icon = models.CharField(max_length=128, null=True, blank=True)
@@ -30,6 +30,11 @@ class HierarchicalKeywordMeta(models.Model):
                                   .filter(meta__isnull=False,
                                           depth=1)
 
+    @property
+    def boxcolor(self):
+        # we use parent color for the moment
+        return self.hkeyword.get_parent().meta.color
+
     def update(self, **attrs):
         for attr, val in attrs.items():
             setattr(self, attr, val)
@@ -38,8 +43,10 @@ class HierarchicalKeywordMeta(models.Model):
 def get_menu_order():
     return Menu.objects.all().count() + 1
 
+
 def get_menu_item_order():
     return MenuItem.objects.all().count() + 1
+
 
 class Menu(models.Model):
 
@@ -72,8 +79,10 @@ class MenuItem(models.Model):
     menu = models.ForeignKey(Menu)
     title = models.CharField(max_length=255, null=False, unique=False)
     url = models.URLField(null=True, blank=True)
-    order = models.IntegerField(null=False, default=get_menu_item_order,
-                                help_text=_("Position of menu item, ascending"))
+    order = models.IntegerField(
+        null=False,
+        default=get_menu_item_order,
+        help_text=_("Position of menu item, ascending"))
 
     group = models.ForeignKey(GroupProfile, null=True, blank=True)
     region = models.ForeignKey(Region, null=True, blank=True)
@@ -135,7 +144,7 @@ class MenuItem(models.Model):
         elif self.region:
             return self.region.name
         else:
-            return url
+            return ''
 
     def get_filter(self):
         """
