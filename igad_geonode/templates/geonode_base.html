@@ -4,9 +4,9 @@
 {% load staticfiles %}
 
 {% block extra_script %}
-    {{ block.super }}
-    {% if request.resolver_match.url_name == 'search' or request.resolver_match.url_name == 'layer_browse' %}
+    {{ block.super }}#}
+    {# {% if request.resolver_match.url_name == 'search' or request.resolver_match.url_name == 'layer_browse' %} #}
         {# we're in search #}
         {% include 'igad/search_extension.html' %}
-    {% endif %}
+    {# {% endif %} #}
 {% endblock %}
