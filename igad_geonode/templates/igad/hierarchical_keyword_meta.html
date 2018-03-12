@@ -6,8 +6,8 @@
 {% load pagination_tags %}
 
 {% block body_outer %}
-  <div class="page-header" style="color: {{ object.meta.color }}">
-    <h2>{{ object.meta.title }}</h2>
+  <div class="page-header">
+    <h2  style="color: {{ object.meta.color }}">{{ object.meta.title }}</h2>
     {% if object.meta.description %}
     <h5>{{ object.meta.description }}</h5>
     {% endif %}
