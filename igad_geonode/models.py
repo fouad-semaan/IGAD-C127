@@ -32,8 +32,11 @@ class HierarchicalKeywordMeta(models.Model):
 
     @property
     def boxcolor(self):
-        # we use parent color for the moment
-        return self.hkeyword.get_parent().meta.color
+        # use parent color if empty
+        if self.color != '':
+            return self.color
+        else:
+            return self.hkeyword.get_parent().meta.color
 
     def update(self, **attrs):
         for attr, val in attrs.items():
