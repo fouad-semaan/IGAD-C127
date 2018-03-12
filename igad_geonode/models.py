@@ -82,6 +82,10 @@ class MenuItem(models.Model):
     menu = models.ForeignKey(Menu)
     title = models.CharField(max_length=255, null=False, unique=False)
     url = models.URLField(null=True, blank=True)
+    blank = models.BooleanField(
+        default=True,
+        verbose_name=_("New window"),
+        help_text=_("Open link in new browser window"))
     order = models.IntegerField(
         null=False,
         default=get_menu_item_order,

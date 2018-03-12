@@ -9,4 +9,16 @@
         {# we're in search #}
         {% include 'igad/search_extension.html' %}
     {# {% endif %} #}
+    <script type="text/javascript">
+        function init_menus(){
+            var menu_items = $('.igad-menu-item a');
+            menu_items.each(function(idx, item){
+                item = $(item);
+                if (item.data('type') == 'url'){
+                    item.attr('target', item.data('blank') == 'True' ? '_blank' : '_self');
+                }
+            });
+        }
+        $(init_menus);
+    </script>
 {% endblock %}

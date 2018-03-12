@@ -14,14 +14,15 @@
             var filter_type = item.data('type');
             var filter_value = item.data('value');
             var filter = item.data('filter');
+            var value;
             if (filter_type == 'url'){
-                var value = filter_value;
+                value = filter_value;
             } else {
                 var indexHkeyword = location.href.indexOf('hkeywords');
                 var pathname = indexHkeyword > -1 ? location.href.substring(0,indexHkeyword) + 'search' : location.pathname;
                 var loc = new URLSearchParams(location.search);
                 loc.set(filter, filter_value);
-                var value = pathname + '?' + loc.toString();
+                value = pathname + '?' + loc.toString();
             }
             item.attr('href', value);
         }
