@@ -7,7 +7,10 @@
 
 {% block body_outer %}
   <div class="page-header">
-    <h2>{% trans "Thematic Areas" %}</h2>
+    <h2>{{ object.meta.title }}</h2>
+    {% if object.meta.description %}
+    <h5>{{ object.meta.description }}</h5>
+    {% endif %}
   </div>
   {% with include_type_filter='true' %}
   {% with header='Type' %}
