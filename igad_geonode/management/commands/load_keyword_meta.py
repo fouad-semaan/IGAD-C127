@@ -51,7 +51,7 @@ class Command(BaseCommand):
         path = options['path']
         if path:
             print('parsing', path)
-            parsed = self.parse_file(path)
+            parsed = self.parse_file(path,delimiter=';')
             self.set_keywords(parsed)
         elif options['clear']:
             print('clearing hkeywords')
@@ -88,9 +88,10 @@ class Command(BaseCommand):
         # triples of term, parent, indent
         out = []
 
-        header = ('hkeyword', 'title', 'icon', 'description', 'url',)
+        header = ('hkeyword', 'title', 'icon', 'description', 'color', 'url')
         with open(fname, 'rt') as f:
             r = csv.reader(f, **dialect)
+            r.next()
             for l in r:
                 item = dict(zip(header, map(str.strip, l)))
                 if not item['hkeyword'] or not item['title']:
