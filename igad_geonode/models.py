@@ -147,7 +147,7 @@ class MenuItem(models.Model):
         elif self.region:
             return self.region.name
         else:
-            return ''
+            return self.url
 
     def get_filter(self):
         """
