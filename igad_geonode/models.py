@@ -11,14 +11,23 @@ from geonode.groups.models import GroupProfile
 
 from igad_geonode.utils import searchurl
 
+def get_hkeyword_meta_order():
+    return HierarchicalKeywordMeta.objects.all().count() + 1
+
 
 class HierarchicalKeywordMeta(models.Model):
+
+    class Meta:
+        ordering = ['order']
+
     hkeyword = models.OneToOneField(HierarchicalKeyword, related_name='meta')
     title = models.CharField(max_length=128, null=False, default="")
     description = models.TextField(null=True, blank=True)
     icon = models.CharField(max_length=128, null=True, blank=True)
     color = models.CharField(max_length=128, null=True, blank=True)
     url = models.URLField(null=True, blank=True)
+    order = models.IntegerField(null=False, default=get_hkeyword_meta_order,
+                                help_text=_("Position of category, ascending"))
 
     @classmethod
     def get_keywords(cls):

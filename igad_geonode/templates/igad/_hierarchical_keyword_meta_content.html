@@ -12,7 +12,7 @@
         <div class="container-fluid">
             {% block content %}
             <div class="keywords keywords-container row">
-                {% for subkeyword in object.get_children %}
+                {% for subkeyword in hkeywords_meta_children %}
                     {% include 'igad/hkeyword_box.html' %}
                 {% endfor %}
             </div>
