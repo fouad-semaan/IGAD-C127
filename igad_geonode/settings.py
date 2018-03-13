@@ -45,7 +45,7 @@ WSGI_APPLICATION = "{}.wsgi.application".format(PROJECT_NAME)
 ALLOWED_HOSTS = ['localhost', 'django', '188.165.62.179', 'igad-dev.geo-solutions.it'] if os.getenv('ALLOWED_HOSTS') is None \
     else re.split(r' *[,|:|;] *', os.getenv('ALLOWED_HOSTS'))
 
-PROXY_ALLOWED_HOSTS += ('nominatim.openstreetmap.org',)
+PROXY_ALLOWED_HOSTS += ('nominatim.openstreetmap.org', 'demo.geo-solutions.it', 'ihp-wins.unesco.org')
 
 # AUTH_IP_WHITELIST property limits access to users/groups REST endpoints
 # to only whitelisted IP addresses.
@@ -345,17 +345,19 @@ NOTIFICATIONS_MODULE = 'pinax.notifications'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-INSTALLED_APPS += ('geonode.contrib.ows_api',)
-
 GEOIP_PATH = os.path.join(os.path.dirname(__file__), '..', 'GeoLiteCity.dat')
 
 MONITORING_ENABLED = True
 
 # add following lines to your local settings to enable monitoring
 if MONITORING_ENABLED:
-    INSTALLED_APPS += ('geonode.contrib.monitoring',)
-    MIDDLEWARE_CLASSES += \
-        ('geonode.contrib.monitoring.middleware.MonitoringMiddleware',)
+    if 'geonode.contrib.monitoring' not in INSTALLED_APPS:
+        INSTALLED_APPS += ('geonode.contrib.monitoring',)
+    if 'geonode.contrib.ows_api' not in INSTALLED_APPS:
+        INSTALLED_APPS += ('geonode.contrib.ows_api',)
+    if 'geonode.contrib.monitoring.middleware.MonitoringMiddleware' not in MIDDLEWARE_CLASSES:
+        MIDDLEWARE_CLASSES += \
+            ('geonode.contrib.monitoring.middleware.MonitoringMiddleware',)
     MONITORING_CONFIG = None
     MONITORING_HOST_NAME = 'localhost'
     MONITORING_SERVICE_NAME = 'local-geonode'
