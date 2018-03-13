@@ -23,7 +23,7 @@
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ menu.name }}<i class="fa fa-angle-down fa-lg"></i></a>
     <ul class="dropdown-menu">
         {% for menu_item in menu_items %}
-        <li class="igad-menu-item"><a href="{{ menu_item.get_url }}" data-type="{{ item.get_filter_type }}" data-blank="{{ menu_item.blank }}">{{ menu_item.title }} {{ menu_item.blank|yesno:'_blank,_self' }}</a></li>
+        <li class="igad-menu-item"><a href="{{ menu_item.get_url }}" data-type="{{ item.get_filter_type }}" data-blank="{{ menu_item.blank }}">{{ menu_item.title }}</a></li>
         {% endfor %}
     </ul>
  </li>
