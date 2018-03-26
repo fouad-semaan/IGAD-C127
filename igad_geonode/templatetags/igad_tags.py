@@ -29,3 +29,4 @@ register = template.Library()
 @register.simple_tag(takes_context=True)
 def searchurl(context, **params):
     return surl(**params)
+

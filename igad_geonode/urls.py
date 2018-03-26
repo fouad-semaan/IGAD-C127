@@ -25,14 +25,17 @@ from geonode.urls import urlpatterns
 from igad_geonode import views
 
 hkeywords_patterns = [
-                url(r'^$', views.hkeyword_index, name='hkeyword_index'),
-                url(r'^(?P<slug>[a-zA-Z0-9_.-]+)/',
+                #url(r'^$', views.hkeyword_index, name='hkeyword_index'),
+                url(r'^area/(?P<slug>[a-zA-Z0-9_.-]+)/',
                     views.hkeyword_view,
                     name='hkeyword_view'),
+                url(r'^list/(?P<slug>[a-zA-Z0-9_.-]+)/',
+                    views.hkeyword_contents,
+                    name='hkeyword_list_contents'),
                 ]
 
 urlpatterns += [
-    url(r'hkeywords/', include(hkeywords_patterns)),
+    url(r'contents/', include(hkeywords_patterns)),
     url(r'^/?$',
         TemplateView.as_view(template_name='site_index.html'),
         name='home'),

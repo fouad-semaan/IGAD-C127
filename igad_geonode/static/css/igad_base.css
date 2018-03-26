@@ -23,10 +23,12 @@
 }
 
 .icon {
-    width: 48px;
+    width: 100px;
     margin-right: 4px;
-    background-size: 100% auto;
+    /*background-size: 100% auto;*/
+    background-size: 70px;
     background-repeat: no-repeat;
+    background-position: center;
 }
 
 .description {

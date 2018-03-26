@@ -242,23 +242,20 @@
         </div>
         <div class="col-md-6 text-right">
           <ul class="list-unstyled">
-            <li>{% trans "Powered by" %} <a href="http://geonode.org">{% trans "GeoNode" %}</a> <em>{% trans "version" %} {{ VERSION }}</em></li>
-            <li><a href="{% url "developer" %}">{% trans "Developers" %}</a> | <a href="{% url "about" %}">{% trans "About" %}</a><li>
+            <li style="text-align: left;"><h2 style="margin-top: 0px;">Contact Us </h2> </li>
+            <li style="text-align: left;">
+               IGAD Secretariat</li>
+            <li style="text-align: left;">Avenue Georges Clemenceau</li>
+            <li style="text-align: left;">Plot 9, Colville Street </li>
+            <li style="text-align: left;">P.O. Box 2653 </li>
+            <li style="text-align: left;">Djibouti, Republic of Djibouti </li>
+            <li style="text-align: left;">Tel: +253-213-54050</li>
+            <li style="text-align: left;">Fax: +253-213-56994</li
           </ul>
-          <label class="hidden">{% trans "Language" %}</label>
-          {% if csrf_token != "NOTPROVIDED" %}
-          {% get_current_language as LANGUAGE %}
-          <form class="form-inline" action="/i18n/setlang/" method="post">
-          {% csrf_token %}
-            <select class="col-md-6 pull-right" name="language" onchange="javascript:form.submit()">
-              {% for lang in LANGUAGES %}
-              <option value="{{ lang.0 }}" {% ifequal LANGUAGE_CODE lang.0 %} selected="selected"{% endifequal %}>
-                {{ lang.1 }}
-              </option>
-              {% endfor %}
-            </select>
-          </form>
-          {% endif %}
+          <ul class="list-unstyled">
+            <li>Powered By <a href="http://geonode.org"> Geonode</a></li>
+          </ul>
+          <label class="hidden">Lingua</label>
         </div>
       </div>
     </div>
