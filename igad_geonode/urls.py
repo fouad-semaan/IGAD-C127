@@ -30,8 +30,11 @@ hkeywords_patterns = [
                     views.hkeyword_view,
                     name='hkeyword_view'),
                 url(r'^list/(?P<slug>[a-zA-Z0-9_.-]+)/',
-                    views.hkeyword_contents,
-                    name='hkeyword_list_contents'),
+                    views.hkeyword_contents_view,
+                    name='hkeyword_contents_view'),
+                url(r'^group/(?P<pk>[0-9]+)/',
+                    views.groupcontents_view,
+                    name='groupcontents_view'),
                 ]
 
 urlpatterns += [

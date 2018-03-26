@@ -101,13 +101,12 @@ class MenuItem(models.Model):
         help_text=_("Position of menu item, ascending"))
 
     group = models.ForeignKey(GroupProfile, null=True, blank=True)
-    region = models.ForeignKey(Region, null=True, blank=True)
 
     class Meta:
         ordering = ['order']
 
     def clean(self):
-        if not (self.url or self.group or self.region):
+        if not (self.url or self.group):
             msg = _("There should be one of: url, group or region, got none")
             raise ValidationError({'url': msg, 'group': msg, 'region': msg})
         if self.url and self.group:
@@ -128,8 +127,6 @@ class MenuItem(models.Model):
         # dynamically, or for related object
         if self.group:
             return searchurl(group=self.group.group.id)
-        elif self.region:
-            return searchurl(regions__name__in=self.region.name)
         return self.url
 
     @classmethod
@@ -147,8 +144,8 @@ class MenuItem(models.Model):
         search filter
         or 'url' - meaning it's plain url to use as href
         """
-        if self.group or self.region:
-            return 'filter'
+        if self.group:
+            return 'group'
         return 'url'
 
     def get_filter_value(self):
@@ -157,8 +154,6 @@ class MenuItem(models.Model):
         """
         if self.group:
             return self.group.group.id
-        elif self.region:
-            return self.region.name
         else:
             return self.url
 
@@ -168,7 +163,5 @@ class MenuItem(models.Model):
         """
         if self.group:
             return 'group'
-        elif self.region:
-            return 'regions__name__in'
         else:
             return ''

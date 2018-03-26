@@ -17,7 +17,11 @@
             var value;
             if (filter_type == 'url'){
                 value = filter_value;
-            } else {
+            }
+            else if (filter_type == 'group'){
+                value = '/contents/group/'+ filter_value +'/?group=' + filter_value;
+            }
+            else {
                 var indexHkeyword = location.href.indexOf('contents');
                 var pathname = indexHkeyword > -1 ? location.href.substring(0,indexHkeyword) + 'search' : location.pathname;
                 var loc = new URLSearchParams(location.search);

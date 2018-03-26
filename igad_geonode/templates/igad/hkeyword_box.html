@@ -1,6 +1,6 @@
 {% load igad_tags %}
 <div class="col-xs-12 col-md-6">
-        <a href="{% url 'hkeyword_list_contents' subkeyword.hkeyword.slug %}?keywords__slug__in={{ subkeyword.hkeyword.slug }}">
+        <a href="{% url 'hkeyword_contents_view' subkeyword.hkeyword.slug %}?keywords__slug__in={{ subkeyword.hkeyword.slug }}">
                 {% if subkeyword.boxcolor %}
                 <div class="subkeyword" style="background-color: {{ subkeyword.boxcolor }};">
                         <div class="description">

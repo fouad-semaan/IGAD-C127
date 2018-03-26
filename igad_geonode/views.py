@@ -6,7 +6,7 @@ from __future__ import print_function
 from django.http import Http404
 from django.views.generic import DetailView, ListView
 
-from geonode.base.models import HierarchicalKeyword
+from geonode.base.models import HierarchicalKeyword, Group
 
 class HierarchicalKeywordMetaView(DetailView):
     model = HierarchicalKeyword
@@ -47,19 +47,17 @@ class HierarchicalKeywordContentsView(DetailView):
 
     def get_context_data(self, *args, **kwargs):
         ctx = super(HierarchicalKeywordContentsView, self).get_context_data(*args, **kwargs)
-        ctx['all_hkeywords'] = HierarchicalKeyword.objects\
-                                                  .filter(meta__isnull=False,
-                                                          depth=1)
-        ctx['hkeywords_meta_children'] = self.get_hkeywords_meta_children()
-        ctx['test'] = [{'name':1}]
+        ctx['title'] = self.get_object().meta.title
         return ctx
 
-    def get_hkeywords_meta_children(self):
-        obj = self.get_object()
-        children = obj.get_children()
-        _children_meta = [child.meta for child in children]
-        children_meta = sorted(_children_meta, key=lambda k: k.order)
-        return children_meta
+class GroupContentsView(DetailView):
+    model = Group
+    template_name = 'igad/search.html'
+
+    def get_context_data(self, *args, **kwargs):
+        ctx = super(GroupContentsView, self).get_context_data(*args, **kwargs)
+        ctx['title'] = self.get_object().name
+        return ctx
 
 
 class HierarchicalKeywordMetaList(ListView):
@@ -72,5 +70,6 @@ class HierarchicalKeywordMetaList(ListView):
 
 
 hkeyword_view = HierarchicalKeywordMetaView.as_view()
-hkeyword_contents = HierarchicalKeywordContentsView.as_view()
+hkeyword_contents_view = HierarchicalKeywordContentsView.as_view()
+groupcontents_view = GroupContentsView.as_view()
 hkeyword_index = HierarchicalKeywordMetaList.as_view()
