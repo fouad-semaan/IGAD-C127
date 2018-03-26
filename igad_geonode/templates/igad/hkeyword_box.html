@@ -6,14 +6,14 @@
                         <div class="description">
                                 {{ subkeyword.title }}
                         </div>
-                        <div class="icon" style="background-image: url({{ STATIC_URL }}img/icons/{{ subkeyword.icon }});"></div>
+                        <div class="icon" style="background-image: url('{{ STATIC_URL }}img/icons/{{ subkeyword.icon }}');"></div>
                 </div>
                 {% else %}
                 <div class="subkeyword" style="background-color: #0b612d;">
                         <div class="description">
                                 {{ subkeyword.title }}
                         </div>
-                        <div class="icon" style="background-image: url({{ STATIC_URL }}img/icons/{{ subkeyword.icon }});"></div>
+                        <div class="icon" style="background-image: url('{{ STATIC_URL }}img/icons/{{ subkeyword.icon }}');"></div>
                 </div>
                 {% endif %}
         </a>
