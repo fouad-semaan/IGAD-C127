@@ -35,3 +35,15 @@
     flex: 1;
     overflow: hidden;
 }
+
+.partner-logos {
+    margin: 0px 0px 20px 0px;
+}
+
+.partner-logo {
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100px;
+    width: 33%;
+    display: inline-block;
+}
