@@ -37,9 +37,9 @@ hkeywords_patterns = [
                     name='groupcontents_view'),
                 ]
 
-urlpatterns += [
+urlpatterns = [
     url(r'contents/', include(hkeywords_patterns)),
     url(r'^/?$',
         TemplateView.as_view(template_name='site_index.html'),
         name='home'),
-]
+] + urlpatterns

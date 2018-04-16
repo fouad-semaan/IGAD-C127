@@ -1,18 +1,12 @@
-{% extends 'geonode_base.html' %}
+{% extends 'index.html' %}
 {% load i18n %}
 {% load staticfiles %}
 {% load base_tags %}
 
-{% block title %} {% trans "Welcome!" %} - {{ block.super }} {% endblock %}
-
-{% block body_class %}home{% endblock %}
-
-{% block middle %}
-  {{ block.super }}
-
 {% comment %}
 This is where you can override the hero area block. You can simply modify the content below or replace it wholesale to meet your own needs.
 {% endcomment %}
+
   {% block hero %}
   <div class="jumbotron">
     <div class="container">
@@ -35,8 +29,6 @@ This is where you can override the hero area block. You can simply modify the co
   </div>
   {% endblock %}
 
-  {% block mainbody %}
-  
       {% block bigsearch %}
       <div class="big-search">
         <div class="container">
@@ -124,30 +116,4 @@ This is where you can override the hero area block. You can simply modify the co
         </div>
       </section>
       {% endblock %}
-
-    {% endblock mainbody %}
-
-{% endblock middle %}
-
-{% block extra_script %}
-{{ block.super }}
-{% if DEBUG_STATIC %}
-<script src="{{ STATIC_URL }}lib/js/angular.js"></script>
-{% endif %}
-<script type="text/javascript">
-    FEATURED_URL = '{% url 'api_dispatch_list' api_name='api' resource_name='featured' %}'
-    'use strict';
-    (function(){
-      var module = angular.module('featured', []);
-      module.run(function($http, $rootScope){
-        $http.get(FEATURED_URL).success(function(data){
-          $rootScope.featured = data.objects;
-        });
-      });
-    })();
-</script>
-<script>
-	$('[data-toggle="tooltip"]').tooltip();
-</script>
-{% endblock extra_script %}
 
