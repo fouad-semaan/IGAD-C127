@@ -23,7 +23,7 @@ class HierarchicalKeywordMeta(models.Model):
     hkeyword = models.OneToOneField(HierarchicalKeyword, related_name='meta')
     title = models.CharField(max_length=128, null=False, default="")
     description = models.TextField(null=True, blank=True)
-    icon = models.CharField(max_length=128, null=True, blank=True)
+    icon = models.ImageField(upload_to='img/%Y/%m', null=False, blank=False, default='img/icons/blank.png')
     color = models.CharField(max_length=128, null=True, blank=True)
     url = models.URLField(null=True, blank=True)
     order = models.IntegerField(null=False, default=get_hkeyword_meta_order,

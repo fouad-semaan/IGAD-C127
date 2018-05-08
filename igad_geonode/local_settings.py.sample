@@ -27,7 +27,7 @@ STATIC_ROOT = '%s/igad_geonode/static_root' % PROJECT_ROOT
 
 # SECRET_KEY = '************************'
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = os.getenv('SECRET_KEY', '**************************')
+SECRET_KEY = os.getenv('SECRET_KEY', 'TODO')
 
 # per-deployment settings should go here
 SITE_HOST_NAME = os.getenv('SITE_HOST_NAME', "igad-dev.geo-solutions.it")
@@ -66,7 +66,7 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'geonode_data',
         'USER' : 'geonode',
-        'PASSWORD' : '**********',
+        'PASSWORD' : '***********',
         'HOST' : 'localhost',
         'PORT' : '5432',
         'CONN_TOUT': 900,
@@ -94,7 +94,7 @@ OGC_SERVER_DEFAULT_USER = os.getenv(
 )
 
 OGC_SERVER_DEFAULT_PASSWORD = os.getenv(
-    'GEOSERVER_ADMIN_PASSWORD', '**********'
+    'GEOSERVER_ADMIN_PASSWORD', '*********************'
 )
 
 # OGC (WMS/WFS/WCS) Server Settings
@@ -143,7 +143,7 @@ CATALOGUE = {
 
         # login credentials (for GeoNetwork)
         'USER': 'admin',
-        'PASSWORD': '**********',
+        'PASSWORD': '***************',
         'ALTERNATES_ONLY': True,
     }
 }
@@ -202,10 +202,10 @@ PYCSW = {
 
 # If you want to enable Mosaics use the following configuration
 UPLOADER = {
-    'BACKEND': 'geonode.rest',
-    # 'BACKEND': 'geonode.importer',
+    # 'BACKEND': 'geonode.rest',
+    'BACKEND': 'geonode.importer',
     'OPTIONS': {
-        'TIME_ENABLED': False,
+        'TIME_ENABLED': True,
         'MOSAIC_ENABLED': False,
         'GEOGIG_ENABLED': False,
     },

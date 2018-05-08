@@ -6830,6 +6830,7 @@ article.tab-pane {
 .navbar-inverse .navbar-nav > li > a {
   color: #fff;
   font-weight: 600;
+  font-size: 14px !important;
   padding-top: 25px;
   padding-bottom: 25px;
 }
@@ -6925,6 +6926,7 @@ article.tab-pane {
 }
 .home .navbar-inverse .navbar-nav > li > a {
   color: #0b612d;
+  font-size: 14px !important;
 }
 .home .navbar-inverse .navbar-nav > li > a:hover {
   color: #fff;
