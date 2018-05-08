@@ -42,7 +42,10 @@ LOCAL_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 WSGI_APPLICATION = "{}.wsgi.application".format(PROJECT_NAME)
 
-ALLOWED_HOSTS = ['localhost', 'django', '188.165.62.179', 'igad-dev.geo-solutions.it'] if os.getenv('ALLOWED_HOSTS') is None \
+# Set this if 'local_settings' are not present
+# SITE_HOST_NAME = 'geonode.igad.int'
+
+ALLOWED_HOSTS = ['localhost', 'django', SITE_HOST_NAME] if os.getenv('ALLOWED_HOSTS') is None \
     else re.split(r' *[,|:|;] *', os.getenv('ALLOWED_HOSTS'))
 
 PROXY_ALLOWED_HOSTS += ('nominatim.openstreetmap.org', 'demo.geo-solutions.it', 'ihp-wins.unesco.org')
@@ -67,10 +70,10 @@ INSTALLED_APPS += (PROJECT_NAME,)
 # Location of url mappings
 ROOT_URLCONF = os.getenv('ROOT_URLCONF', '{}.urls'.format(PROJECT_NAME))
 
-MEDIA_ROOT = os.getenv('MEDIA_ROOT', os.path.join(LOCAL_ROOT, "uploaded"))
+MEDIA_ROOT = os.getenv('MEDIA_ROOT', os.path.join(LOCAL_ROOT, "/share/uploaded"))
 
 STATIC_ROOT = os.getenv('STATIC_ROOT',
-                        os.path.join(LOCAL_ROOT, "static_root")
+                        os.path.join(LOCAL_ROOT, "/share/static_root")
                         )
 
 # Additional directories which hold static files
@@ -359,7 +362,6 @@ if MONITORING_ENABLED:
         MIDDLEWARE_CLASSES += \
             ('geonode.contrib.monitoring.middleware.MonitoringMiddleware',)
     MONITORING_CONFIG = None
-    MONITORING_HOST_NAME = 'localhost'
     MONITORING_SERVICE_NAME = 'local-geonode'
     MONITORING_HOST_NAME = SITE_HOST_NAME
 

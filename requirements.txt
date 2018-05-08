@@ -1,1 +1,2 @@
-# -e git://github.com/geosolutions-it/geonode.git@master#egg=geonode
+-e git://github.com/geosolutions-it/geonode.git@master#egg=geonode
+pygdal==2.2.1.3
