@@ -50,4 +50,55 @@ Moreover, a new sidebar menu will appear based on several filters.
 Filters sidebar
 ***************
 
-There are two types of filters that can be applied: 
+There are two ways to apply filters: 
+
+#. OR type filter: 
+
+* **Navigate** to the **Data** *menu* and **click** on the layers option to explore all the existing layers in the portal (see *Fig. 1*).  
+
+.. figure:: img/keywords.png
+   :align: center
+   :scale: 30 %
+   
+   *Fig. 1*
+
+* **Expand** the **KEYWORDS** *Filter*. **Select**, for example, *actualevap* option (will be highlighted in blue), all the layers related to the selected option will be found (see *Fig. 2*).
+
+.. figure:: img/actualevap.png
+   :align: center
+   :scale: 30 %
+   
+   *Fig. 2*   
+   
+* Next **Select** the keyword *administrative*, further layers related to the selected keys will be added to the selection (see *Fig. 3*).
+
+.. figure:: img/administrative.png
+   :align: center
+   :scale: 30 %
+   
+   *Fig. 3*     
+   
+.. note:: Note that filtering the data using many keywords will apply an **OR** filter.   
+
+#. AND type filter:
+
+* **Click** on *Clear* to reset the filters. You will be redirected to the main layers page as in *Fig. 1*.  
+
+* **Expand** the **OWNER** *Filter*. **Select**, for example, *igad* option, all the layers related to the selected option will be found (see *Fig. 4*).
+
+.. figure:: img/igad.png
+   :align: center
+   :scale: 50 %
+   
+   *Fig. 4*   
+   
+* Next **Expand** the *TYPE* *Filter* and **Select** *Vector Layers* option. Layers that are owned by *igad* **AND** are vectors will be selected only (see *Fig. 5*).
+
+.. figure:: img/vector.png
+   :align: center
+   :scale: 50 %
+   
+   *Fig. 5*     
+   
+.. note:: Note that filtering the data using options from different filters lists will apply an **AND** filter.
+   
