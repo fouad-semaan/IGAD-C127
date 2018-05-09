@@ -14,7 +14,7 @@ case $1 in
                                 ;;
 			*)
 				echo "Starting Backup to $2"
-				DJANGO_SETTINGS_MODULE=igad_geonode.settings python -W ignore manage.py backup --backup-dir=$2
+				DJANGO_SETTINGS_MODULE=igad_geonode.settings python -W ignore manage.py backup -c backup/settings.ini --backup-dir=$2
 				;;
 		esac
 		;;
