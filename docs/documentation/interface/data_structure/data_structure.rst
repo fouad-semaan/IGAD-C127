@@ -62,7 +62,7 @@ There are two ways to apply filters:
    
    *Fig. 1*
 
-* **Expand** the **KEYWORDS** *Filter*. **Select**, for example, *actualevap* option (will be highlighted in blue), all the layers related to the selected option will be found (see *Fig. 2*).
+* **Expand** the **KEYWORDS** *Filter*. **Select**, for example, *actualevap* item (will be highlighted in blue), all the layers related to the selected option will be found (see *Fig. 2*).
 
 .. figure:: img/actualevap.png
    :align: center
@@ -84,7 +84,7 @@ There are two ways to apply filters:
 
 * **Click** on *Clear* to reset the filters. You will be redirected to the main layers page as in *Fig. 1*.  
 
-* **Expand** the **OWNER** *Filter*. **Select**, for example, *igad* option, all the layers related to the selected option will be found (see *Fig. 4*).
+* **Expand** the **OWNER** *Filter*. **Select**, for example, *igad* item, all the layers related to the selected item will be found (see *Fig. 4*).
 
 .. figure:: img/igad.png
    :align: center
@@ -92,7 +92,7 @@ There are two ways to apply filters:
    
    *Fig. 4*   
    
-* Next **Expand** the *TYPE* *Filter* and **Select** *Vector Layers* option. Layers that are owned by *igad* **AND** are vectors will be selected only (see *Fig. 5*).
+* Next **Expand** the *TYPE* *Filter* and **Select** *Vector Layers* item. Layers that are owned by *igad* **AND** are vectors will be selected only (see *Fig. 5*).
 
 .. figure:: img/vector.png
    :align: center
@@ -100,5 +100,5 @@ There are two ways to apply filters:
    
    *Fig. 5*     
    
-.. note:: Note that filtering the data using options from different filters lists will apply an **AND** filter.
+.. note:: Note that filtering the data using items from different filters lists will apply an **AND** filter.
    
