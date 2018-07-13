@@ -120,6 +120,61 @@ Once you have finished all your edits on the layer. **Return** to the welcome pa
 
 In the figure above, The icon highlighted in blue means that the layer was uploaded from a local machine. 
 
+Managing Temporal Data
+######################
+
+Temporal data is stored in fields in the attribute table of a shapefile. Each feature can have a date/time value that represents the temporal event or a begining and 
+end time stored in two different fields. Temporal data combined with spatial data is essential to analyze the evolution of a specific phenomena.    
+
+
+Uploading Data
+**************
+
+Since IGAD portal leverages on GeoNode, it allows the user to upload vector data storing temporal fields. As seen before, the upload procedure of 
+a layer is the same.
+
+#. From the top menu, **Scroll down** the *Data* menu then **Click** on *Upload Layer*. This will open the upload form.
+ 
+    .. figure:: img/data.png
+
+On the new page, you can upload multiple layers concurrently and then configuring them separately. 
+
+#. **Drag/Drop** your multiple files in the *Drop files here* area. The files will be grouped separately and temporal dimension will be detected automatically. 
+
+   .. figure:: img/multi-file.png
+
+#. **Click** on *Upload files* button. 
+
+   .. figure:: img/upload-multi.png
+   
+By clicking on continue you can setup the first shapefile on a new popup page and the second on an another one.
+
+#. **Click** on *Continue* button of the second shapefile. You will be addressed to a popup page to setup the temporal field(s). 
+
+   .. figure:: img/temporal.png
+   
+#. **Switch on** the selector to configure the file as a time series. **Check** the Date field. 
+
+   .. figure:: img/time-config.png
+
+#. Since the layer has a begining and an end temporal fields, you can set the End-time attribute in the advanced options. **Expand** the *Optional End-Time attribute* menu. 
+   **Check** the box then **Select** from the list the enddate attribute.
+
+   .. figure:: img/advanced-options.png
+  
+   .. note::  Step 3 is not necessary in case the shapefile has a unique temporal field.   
+   
+#. On *Time attribute Presentation* menu, **Choose** the appropriate field. In this case is a list of dates. **Read** the additional help menu to understand better date/time 
+   formats.
+
+   .. figure:: img/time-list.png
+   
+#. **Click** on *Next*. The shapefile will be uploaded. You will be redirected to the preview page and a time slidebar will be automatically enabled.
+   
+   .. image:: img/time-slider.gif
+
+   
+
 Managing Remote Services
 ########################
 

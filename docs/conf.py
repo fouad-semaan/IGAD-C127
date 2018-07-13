@@ -130,6 +130,14 @@ latex_elements = {
     # 'figure_align': 'htbp',
 }
 
+from sphinx.builders.html import StandaloneHTMLBuilder
+StandaloneHTMLBuilder.supported_image_types = [
+	'image/gif',
+	'image/png',
+    'image/jpeg'
+]
+
+
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
